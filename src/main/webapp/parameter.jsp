@@ -9,17 +9,22 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--一秒刷新一次-->
+        <meta http-equiv="refresh" content="0.2">
         <title>JSP Page</title>
     </head>
     <%
-        String color="blue";//從 request.getParameter("...") 取得 color 參數
+        String color=request.getParameter("color");//從 request.getParameter("...") 取得 color 參數
         // 額外：若 user 沒輸入參數，就隨機抓顏色
+        
+        if (color==null){
+        String [] colors=new String[]{"red", "green", "yello", "blue", "purple", "black"};
+        int index=((int)(Math.random()*1000)%6);
+        color=colors[index];
+        }
     %>
-    <!--
-    利用 <%=%>
-    這個寫法，產生 bgcolor 屬性的內容
-    -->
-    <body>
+    
+    <body bgcolor="<%=color%>">
         <h1>Hello World!</h1>
     </body>
 </html>
